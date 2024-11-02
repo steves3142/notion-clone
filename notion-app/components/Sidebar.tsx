@@ -1,5 +1,9 @@
+'use client'
+
 import { MenuIcon } from "lucide-react"
 import NewDocumentButton from "./NewDocumentButton"
+import { useCollection } from "react-firebase-hooks/firestore"
+
 import {
     Sheet,
     SheetContent,
@@ -10,7 +14,7 @@ import {
 } from "@/components/ui/sheet"
 
 function Sidebar() {
-
+const [data, loading, errror] = useCollection()
     const menuOptions = (
         <>
             <NewDocumentButton />
