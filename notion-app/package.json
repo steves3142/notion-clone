@@ -13,7 +13,13 @@
     "cf-typegen": "wrangler types --env-interface CloudflareEnv env.d.ts"
   },
   "dependencies": {
+    "@blocknote/core": "^0.18.0",
+    "@blocknote/mantine": "^0.18.1",
+    "@blocknote/react": "^0.18.1",
     "@clerk/nextjs": "^6.1.0",
+    "@liveblocks/client": "^2.10.2",
+    "@liveblocks/react": "^2.10.2",
+    "@liveblocks/yjs": "^2.10.2",
     "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-slot": "^1.1.0",
     "class-variance-authority": "^0.7.0",
@@ -26,7 +32,8 @@
     "react-dom": "^18",
     "react-firebase-hooks": "^5.1.1",
     "tailwind-merge": "^2.5.4",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "yjs": "^13.6.20"
   },
   "devDependencies": {
     "@cloudflare/next-on-pages": "^1.13.5",
