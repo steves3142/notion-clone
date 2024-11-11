@@ -6,9 +6,10 @@ import { Button } from "./ui/button";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import { useDocumentData } from "react-firebase-hooks/firestore";
+import Editor from "./Editor";
 
 function Document({ id }: { id: string }) {
-  const [data, loading, error] = useDocumentData(doc(db, "documents", id)); 
+  const [data, loading, error] = useDocumentData(doc(db, "documents", id));
   const [input, setInput] = useState("");
   const [isUpdating, startTransition] = useTransition();
 
@@ -16,7 +17,7 @@ function Document({ id }: { id: string }) {
     if (data) {
       setInput(data.title);
     }
-  }, [data]); 
+  }, [data]);
 
   const updateTitle = (e: FormEvent) => {
     e.preventDefault();
@@ -25,10 +26,10 @@ function Document({ id }: { id: string }) {
       startTransition(async () => {
         await updateDoc(doc(db, "documents", id), {
           title: input,
-        }); 
-      }); 
+        });
+      });
     }
-  }; 
+  };
 
   return (
     <div>
@@ -54,7 +55,10 @@ function Document({ id }: { id: string }) {
         {/* Avatars */}
       </div>
 
+      <hr className="pb-10"/>
+
       {/* Collaborative Editor */}
+      <Editor />
     </div>
   )
 }
