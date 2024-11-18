@@ -15,8 +15,7 @@ import { inviteUserToDocument } from "@/actions/actions";
 import { usePathname } from "next/navigation";
 import { toast } from "sonner";
 
-function InviteUser() {
-  const [email, setEmail] = useState("");
+function ManageUsers() {
   const [isOpen, setIsOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
@@ -31,7 +30,6 @@ function InviteUser() {
       const { success } = await inviteUserToDocument(roomId, email);
 
       if (success) {
-        setEmail("");
         setIsOpen(false);
         toast.success("User Added to Room successfully!");
       } else {
@@ -43,31 +41,24 @@ function InviteUser() {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <Button asChild variant="outline">
-        <DialogTrigger>Invite</DialogTrigger>
+        <DialogTrigger>Users</DialogTrigger>
       </Button>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Invite a User to collaborate!</DialogTitle>
+          <DialogTitle>Users with Access</DialogTitle>
           <DialogDescription>
-            Enter the email of the user you want to invite.
+            Below is a list of users who have access to this document.
           </DialogDescription>
         </DialogHeader>
 
-        <form className="flex gap-2" onSubmit={handleInvite}>
-          <Input
-            type="email"
-            placeholder="Email"
-            className="w-full"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Button type="submit" disabled={!email || isPending}>
-            {isPending ? "Inviting…" : "Invite"}
-          </Button>
-        </form>
+        <hr className="my-2" />
+
+        <div>
+
+        </div>
       </DialogContent>
     </Dialog>
   );
 }
 
-export default InviteUser;
+export default ManageUsers;
