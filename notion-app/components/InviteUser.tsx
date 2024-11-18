@@ -44,7 +44,7 @@ function InviteUser() {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <Button asChild variant="outline">
-        <DialogTrigger>Delete</DialogTrigger>
+        <DialogTrigger>Invite</DialogTrigger>
       </Button>
       <DialogContent>
         <DialogHeader>
