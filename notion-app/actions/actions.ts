@@ -7,7 +7,7 @@ import { auth } from "@clerk/nextjs/server";
  
 
 export async function createNewDocument() {
-    auth(); 
+    auth.protect();
     const { sessionClaims } = await auth(); 
 
     const docCollectionRef = adminDb.collection("documents");
@@ -25,8 +25,8 @@ export async function createNewDocument() {
 }
 
 export async function deleteDocument(roomId: string) {
-  
-    console.log("deleteDocument", roomId);
+  auth.protect();  
+  console.log("deleteDocument", roomId);
   
     try {
       await adminDb.collection("documents").doc(roomId).delete();
@@ -53,6 +53,7 @@ export async function deleteDocument(roomId: string) {
   }
 
   export async function inviteUserToDocument(roomId: string, email: string) {
+    auth.protect();
     console.group("inviteUsertoDocument", roomId, email);
     
     try {
@@ -69,6 +70,25 @@ export async function deleteDocument(roomId: string) {
         });
 
         return { success: true };
+    } catch (error) {
+      console.error(error);
+      return { success: false };
+    }
+  }
+
+  export async function removeUserFromDocument(roomId: string, email: string) {
+    auth.protect();
+    console.log("removeUserFromDocument", roomId, email);
+  
+    try {
+      await adminDb
+        .collection("users")
+        .doc(email)
+        .collection("rooms")
+        .doc(roomId)
+        .delete();
+  
+      return { success: true };
     } catch (error) {
       console.error(error);
       return { success: false };

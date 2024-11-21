@@ -11,7 +11,7 @@ import {
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useState, useTransition } from "react";
-import { inviteUserToDocument } from "@/actions/actions";
+import { inviteUserToDocument, removeUserFromDocument } from "@/actions/actions";
 import { usePathname } from "next/navigation";
 import { toast } from "sonner";
 import { useUser } from "@clerk/nextjs";
@@ -33,13 +33,16 @@ function ManageUsers() {
     user && query(collectionGroup(db, "rooms"), where("roomId", "==", room.id))
   );
 
-  const handleDelete = async (userId: string ) => {
+  const handleDelete = async (userId: string) => {
     startTransition(async () => {
-        if(!user) return;
-        const { success } = await removeUserFromDocument(room.id, userId);
-    })
-
-
+      if (!user) return;
+      const { success } = await removeUserFromDocument(room.id, userId);
+      if (success) {
+        toast("User removed successfully");
+      } else {
+        toast("Failed to remove user");
+      }
+    });
   };
 
   return (
@@ -57,7 +60,7 @@ function ManageUsers() {
 
         <hr className="my-2" />
 
-        <div>
+        <div className="flex flex-col space-y-2">
           {usersInRoom?.docs.map((doc) => (
             <div 
             key={doc.data().userId}

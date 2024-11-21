@@ -11,6 +11,7 @@ import useOwner from "@/lib/useOwner";
 import DeleteDocument from "./DeleteDocument";
 import InviteUser from "./InviteUser";
 import ManageUsers from "./ManageUsers";
+import Avatars from "./Avatars";
 
 function Document({ id }: { id: string }) {
   const [data, loading, error] = useDocumentData(doc(db, "documents", id));
@@ -61,7 +62,7 @@ function Document({ id }: { id: string }) {
       <div className="flex max-w-6xl mx-auto justify-between items-center mb-5">
         <ManageUsers />
 
-        {/* Avatars */}
+        <Avatars />
       </div>
 
       <hr className="pb-10"/>
