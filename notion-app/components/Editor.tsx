@@ -12,6 +12,7 @@ import "@blocknote/shadcn/style.css";
 import { Button } from "./ui/button";
 import { MoonIcon, SunIcon } from "lucide-react";
 import stringToColor from "@/lib/stringToColor";
+import TranslateDocument from "./TranslateDocument";
 
 type EditorProps = {
     doc: Y.Doc;
@@ -76,6 +77,8 @@ function CollaborativeEditor() {
     return <div className="max-w-6xl mx-auto">
         <div className="flex items-center gap-2 justify-end mb-10">
             {/* TranslateDocument */}
+            <TranslateDocument doc={doc} />
+            
             {/* ChatToDocument AI */}
 
             {/* Dark Mode */}
