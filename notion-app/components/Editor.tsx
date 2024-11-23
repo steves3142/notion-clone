@@ -13,6 +13,7 @@ import { Button } from "./ui/button";
 import { MoonIcon, SunIcon } from "lucide-react";
 import stringToColor from "@/lib/stringToColor";
 import TranslateDocument from "./TranslateDocument";
+import ChatToDocument from "./ChatToDocument";
 
 type EditorProps = {
     doc: Y.Doc;
@@ -78,8 +79,9 @@ function CollaborativeEditor() {
         <div className="flex items-center gap-2 justify-end mb-10">
             {/* TranslateDocument */}
             <TranslateDocument doc={doc} />
-            
+
             {/* ChatToDocument AI */}
+            <ChatToDocument doc={doc}/>
 
             {/* Dark Mode */}
             <Button className={style} onClick={() => setDarkMode(!darkMode)}>
