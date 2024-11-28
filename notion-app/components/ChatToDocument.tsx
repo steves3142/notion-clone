@@ -16,6 +16,10 @@ import * as Y from "yjs";
 import { BotIcon, MessageCircleCode } from "lucide-react";
 import Markdown from "react-markdown";
 
+type ChatResponse = {
+  message: string; // Define the expected type of the `message` field
+};
+
 function ChatToDocument({ doc }: { doc: Y.Doc }) {
   const [input, setInput] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -43,7 +47,8 @@ function ChatToDocument({ doc }: { doc: Y.Doc }) {
 
       if (res.ok) {
         const id = toast.loading("Asking question...");
-        const { message } = await res.json();
+        // Parse the JSON and specify the type
+        const { message } = (await res.json()) as ChatResponse;
 
         setInput("");
         setSummary(message);

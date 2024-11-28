@@ -2,12 +2,17 @@ import { adminDb } from "@/firebase-admin";
 import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 import liveblocks from "@/lib/liveblocks";
+import { NextApiRequest } from "next";
+
+type RequestBody = {
+  room: string; // Represents a Firestore document ID
+};
 
 export async function POST(req: NextRequest) {
-  auth(); // Ensure the user is authenticated
+  auth.protect; // Ensure the user is authenticated
 
   const { userId, sessionClaims } = await auth();
-  const { room } = await req.json();
+  const { room } = (await req.json()) as RequestBody;
 
   const session = liveblocks.prepareSession(sessionClaims?.email!, {
     userInfo: {
@@ -27,8 +32,6 @@ export async function POST(req: NextRequest) {
   if (userInRoom?.exists) {
     session.allow(room, session.FULL_ACCESS);
     const { body, status } = await session.authorize();
-
-    console.log("You are authorised"); //testing on the server if user is authorised
 
     return new Response(body, { status });
   } else {

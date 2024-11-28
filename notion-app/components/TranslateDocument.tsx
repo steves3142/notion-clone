@@ -48,6 +48,10 @@ const languages: Language[] = [
   "japanese",
 ];
 
+type TranslateResponse = {
+  translated_text: string; // Update this based on the actual API response
+};
+
 function TranslateDocument({ doc }: { doc: Y.Doc }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
@@ -74,7 +78,8 @@ function TranslateDocument({ doc }: { doc: Y.Doc }) {
 
       if (res.ok) {
         const id = toast.loading("Translating...");
-        const { translated_text } = await res.json();
+         // Assert the response type
+        const { translated_text } = (await res.json()) as TranslateResponse;
 
         setSummary(translated_text);
         toast.success("Translated Summary successfully!", {
