@@ -2,15 +2,17 @@
 
 ## Technologies Used
 
-- Spotify Web API
-- Next.js
+- Next.js 14
+- React.js
 - Tailwind
 - Firebase
 - ShadCN
 - LiveBlocks
-- Clerk
+- Clerk Auth
 - Typescript
 - Cloudflare Workers
+- Session Tokens
+- OpenAI API
 
 ## Production Deployment
 
