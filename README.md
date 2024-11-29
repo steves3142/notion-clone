@@ -11,3 +11,7 @@
 - Clerk
 - Typescript
 - Cloudflare Workers
+
+## Production Deployment
+
+https://notion-app-eta.vercel.app/
