@@ -25,14 +25,11 @@ export function BlockNote({ doc, provider, darkMode }: EditorProps) {
   // Get user info from Liveblocks authentication endpoint
   const userInfo = useSelf((me) => me.info);
 
-  const editor: BlockNoteEditor = useCreateBlockNote({
+  // Create the BlockNote editor instance using the hook
+  const editor = useCreateBlockNote({
     collaboration: {
       provider,
-
-      // Where to store BlockNote data in the Y.Doc:
       fragment: doc.getXmlFragment("document-store"),
-
-      // Information for this user:
       user: {
         name: userInfo.name,
         color: stringToColor(userInfo.email),
@@ -40,16 +37,18 @@ export function BlockNote({ doc, provider, darkMode }: EditorProps) {
     },
   });
 
+  // Render the editor view
   return (
     <div className="relative max-w-6xl mx-auto">
       <BlockNoteView
         className="min-h-screen"
-        editor={editor}
-        theme={darkMode ? "dark" : "light"}
+        editor={editor} // Pass the editor instance
+        theme={darkMode ? "dark" : "light"} // Apply theme based on darkMode prop
       />
     </div>
   );
 }
+
 
 // Collaborative text editor with simple rich text, live cursors, and live avatars
 export function CollaborativeEditor() {
