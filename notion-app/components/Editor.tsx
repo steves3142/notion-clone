@@ -21,7 +21,7 @@ type EditorProps = {
   darkMode: boolean;
 };
 
-function BlockNote({ doc, provider, darkMode }: EditorProps) {
+export function BlockNote({ doc, provider, darkMode }: EditorProps) {
   // Get user info from Liveblocks authentication endpoint
   const userInfo = useSelf((me) => me.info);
 

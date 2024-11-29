@@ -6,7 +6,7 @@ import { Button } from "./ui/button";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import { useDocumentData } from "react-firebase-hooks/firestore";
-import Editor from "./Editor";
+import { CollaborativeEditor } from "./Editor";
 import useOwner from "@/lib/useOwner";
 import DeleteDocument from "./DeleteDocument";
 import InviteUser from "./InviteUser";
@@ -68,7 +68,7 @@ function Document({ id }: { id: string }) {
       <hr className="pb-10"/>
 
       {/* Collaborative Editor */}
-      <Editor />
+      <CollaborativeEditor />
     </div>
   )
 }
